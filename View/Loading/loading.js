@@ -1,0 +1,6 @@
+function render(data){
+	var layout =	'<div id="title"></div>'+
+					'<div id="loading"></div>'		
+	var css    = 	"<style>html{height:100%;width:100%;background-color:#fff;overflow:hidden}div#title{color:#fff;font-family:'Poiret One';font-size:32px;position:fixed;bottom:10px;left:10px}div#loading{height:0;width:0;position:fixed;left:0;right:0;bottom:0;top:0;margin:auto;background-image:url(img/loading.png);background-repeat:no-repeat;background-size:0 0;z-index:1;-webkit-animation:rotating 40s linear infinite;-moz-animation:rotating 40s linear infinite;-ms-animation:rotating 40s linear infinite;-o-animation:rotating 40s linear infinite;animation:rotating 40s linear infinite}@-webkit-keyframes rotating{from{-ms-transform:rotate(0);-moz-transform:rotate(0);-webkit-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}to{-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotating{from{-ms-transform:rotate(0);-moz-transform:rotate(0);-webkit-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}to{-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}</style>";
+	return layout+css;
+}

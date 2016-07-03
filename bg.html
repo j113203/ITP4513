@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+
+  <meta charset="utf-8">
+  <title>Container</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	
+	<div class="container">	
+		<div id="footer">
+			<div id="airpant1"></div>
+			<div id="airpant2"></div>
+		</div>		
+	</div>	
+</body>
+
+	<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'/>
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"/>
+	<link rel="icon" type="image/png" href="images/favicon.png"/>
+
+	<link rel="stylesheet" href="css/animate.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/normalize.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/skeleton.min.css" rel='stylesheet' type='text/css'/>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/jquery.color-2.1.2.min.js"></script>
+	
+	<style>
+		html{
+			background-color: #fff;
+			overflow: hidden;
+		}
+		div#footer{
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			height: 300px;
+			width: 100%;
+			background-image: url("img/footer2.png");
+			background-repeat: no-repeat;
+			background-size: auto 100%;
+		}
+		div#footer>div#airpant1{
+			position: fixed;
+			left: -182px;
+			top: 50px;
+			width: 182px;
+			height: 162px;
+			background-image: url("img/bg1.png");
+			background-size: 182px 162px;
+			animation-name: airpant1;
+			animation-duration: 60s;
+			animation-iteration-count: infinite;
+		}
+		div#footer>div#airpant2{
+			position: fixed;
+			right: -142px;
+			top: 150px;
+			width: 142px;
+			height: 122px;
+			background-image: url("img/bg2.png");
+			background-size: 142px 122px;	
+			animation-name: airpant2;
+			animation-duration: 40s;
+			animation-iteration-count: infinite;			
+		}
+		@keyframes airpant1 {
+			from {
+				left: -182px;
+				top: 50px;
+			}
+			to {
+				left: 100%;
+				top: 100px;
+			}
+		}
+		@keyframes airpant2 {
+			from {
+				right: -142px;
+				top: 150px;
+			}
+			to {
+				right: 100%;
+				top: 350px;
+			}
+		}
+	</style>
+	<script defer>
+		$(function() {	
+			var Menu = {
+				add : function(picture,callback){
+					callback=callback || function(){};
+					$('<div class="item"></div>').appendTo("body>div.container").css({"background-image":"url('img/Airline.png')"}).animateCss("bounceIn","0.5s",function(){
+						callback();
+					});	
+				}
+			};
+			$("html").animate({
+				backgroundColor: "#0091EA"
+			},0,function(){
+				
+			});			
+		});
+		$.fn.extend({
+			animateCss: function (animationName,time,callback) {
+				callback = callback || function(){};
+				time = time || "1s";
+				var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+				$(this).css({"animation-duration": time}).addClass('animated ' + animationName).one(animationEnd, function() {
+					$(this).removeClass('animated ' + animationName);
+					callback();
+				});
+				return $(this);
+			}
+		});
+	</script>
+</html

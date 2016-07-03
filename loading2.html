@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+
+  <meta charset="utf-8">
+  <title>Container</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	
+	<div class="container">		
+		<div id="HotelLine"></div>
+		<div id="HotelLayour"></div>
+	</div>	
+</body>
+
+	<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'/>
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"/>
+	<link rel="icon" type="image/png" href="images/favicon.png"/>
+
+	<link rel="stylesheet" href="css/animate.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/normalize.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/skeleton.min.css" rel='stylesheet' type='text/css'/>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/jquery.color-2.1.2.min.js"></script>
+	
+	<style>
+		html{
+			height: 100%;
+			width: 100%;
+			background-color: #fff;
+			overflow: hidden;
+		}	
+		body{
+			height: 100%;
+		}
+		div.container{
+			height: 100%;
+			margin-top: 150px;
+		}
+		div#HotelLine{
+			position: fixed;
+			left: 0;
+			width: 0%;
+			height: 125px;
+			top: 50%;
+			margin-top: -65.5px; 
+			background: url("img/loading2.png");
+			background-size: 655px 125px;
+			background-repeat: repeat-x;
+		}	
+		div#HotelLayour{
+			position: fixed;
+			left: 0;
+			width: 0%;
+			height: 125px;
+			top: 50%;
+			left: 50%;
+			margin-top: -65.5px;
+			margin-left: -50%;
+			background-color: #0091EA;
+		}
+	</style>
+	<script defer>
+		$(function() {	
+			$("html").animate({
+				backgroundColor: "#0091EA"
+			},0,function(){
+					
+				$("div#HotelLine").animate({
+					"width" : "100%"
+				},10000,function(){
+					$("div#HotelLine").fadeOut(10000);
+					$("div#HotelLayour").animate({
+						"width" : "100%"
+					},10000,function(){					
+					});		
+				});				
+			});			
+		});
+		$.fn.extend({
+			animateCss: function (animationName,time,callback) {
+				callback = callback || function(){};
+				time = time || "1s";
+				var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+				$(this).css({"animation-duration": time}).addClass('animated ' + animationName).one(animationEnd, function() {
+					$(this).removeClass('animated ' + animationName);
+					callback();
+				});
+				return $(this);
+			}
+		});
+	</script>
+</html>

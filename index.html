@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+
+  <meta charset="utf-8">
+  <title>ITP4513</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<div class="container">
+
+	</div>
+</body>
+
+	<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'/>
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"/>
+	<link rel="icon" type="image/png" href="images/favicon.png"/>
+
+	<link rel="stylesheet" href="css/animate.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/normalize.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/skeleton.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/font-awesome.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/font-awesome-animation.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/jquery.datetimepicker.min.css" rel='stylesheet' type='text/css'/>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/jquery.color-2.1.2.min.js"></script>
+	<script src="js/jquery.animate.min.js"></script>
+	<script src="js/jquery.datetimepicker.full.min.js"></script>	
+	
+	<script defer>
+		(function(){
+			window.Controller = {
+				cache : {},
+				init : function(name,callback){
+					if (!Controller.cache[name]){
+						data = function(){};
+						render = function(){};
+						handle = function(){};
+						$.getScript("Model/"+name+".js",function(){
+							$.getScript("View/"+name+".js",function(){
+								$.getScript("Controller/"+name+".js",function(){								
+									Controller.cache[name]= {};
+									Controller.cache[name].model = data();	
+									Controller.cache[name].view = render;	
+									Controller.cache[name].controller = handle;
+									callback();
+								});
+							});
+						});
+					}else{
+						callback();
+					}
+				},
+				show : function(name){
+					if (!Controller.cache[name]){
+						Controller.init(name,function(){
+							Controller.show(name);
+						});
+					}else{					
+						$("body>div.container").html(Controller.cache[name].view(Controller.cache[name].model));
+						Controller.cache[name].controller(Controller.cache[name].model);
+					}
+				},
+				switchTo : function(name){
+					Controller.switchTo_(name,"Loading/loading");				
+				},
+				switchTo_ : function(name,loading){
+					Controller.init(loading,function(){
+						Controller.cache[loading].model.callback = function(){
+							Controller.show(name);
+						};
+						Controller.show(loading);
+					});
+				} 
+			}
+			Controller.switchTo("Common/login");
+		})();
+	</script>
+</html>

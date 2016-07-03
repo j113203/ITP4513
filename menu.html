@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+
+  <meta charset="utf-8">
+  <title>Container</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	
+	<div class="container">
+		<div id="title">
+			Integrated Tourism Management System
+		</div>
+
+		<div id="info">
+			Mr. W K W (Stafff)
+		</div>
+		
+		<div class="item Airline">
+			<h1>Airline</h1>
+		</div>
+		<div class="item">
+			<h1>1</h1>
+		</div>
+		<div class="item">
+			<h1>2</h1>
+		</div>
+		
+		
+		<div id="footer">		
+		</div>
+		
+	</div>	
+</body>
+
+	<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'/>
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"/>
+	<link rel="icon" type="image/png" href="images/favicon.png"/>
+
+	<link rel="stylesheet" href="css/animate.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/normalize.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/skeleton.min.css" rel='stylesheet' type='text/css'/>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/jquery.color-2.1.2.min.js"></script>
+	
+	<style>
+		html{
+			height: 100%;
+			width: 100%;
+			background-color: #fff;
+			overflow: hidden;
+		}			
+		div.container{
+			margin-top: 150px;
+		}	
+		div#info{
+			background-color: rgba(0,0,0,0.8);
+			position: fixed;
+			color: white;
+			top: 20px;
+			right: 20px;
+			padding:10px;
+			z-index: 10;
+		}
+		div#title{
+			background-color: rgba(0,0,0,0.8);
+			color: white;
+			font-family: 'Poiret One';
+			font-size: 32px;
+			position: fixed;
+			top: 20px;
+			left: 0px;
+			padding:10px;
+			z-index: 10;
+		}
+		div.item{
+			position: relative;
+			display: inline-block;
+			width: 200px;
+			margin: 10px;
+			height: 200px;
+			border-radius: 10px;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-color: rgba(255,255,255,1);
+			background-size: 100% auto;
+			border: 5px solid black;
+			z-index: 3;			
+		}	
+		div.item:hover{			
+			background-color: rgba(0,0,0,0.5);
+			background-image: none !important;	
+		}
+		div.item.Airline{	
+			background-image: url("img/Airline.png");
+		}		
+		div.item.Hotel{	
+			background-image: url("img/Hotel.png");
+		}
+		div.item >h1{
+			color: white;
+			width: 100%;
+			visibility: hidden;
+			text-align: center;
+			vertical-align: middle;
+			line-height: 200px;
+		}
+		div.item:hover >h1{
+			visibility: visible;	
+		}
+		div.item:hover{
+			border: 5px solid white;
+		}
+		div#footer{
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			height: 300px;
+			width: 100%;
+			background-image: url("img/footer2.png");
+			background-repeat: no-repeat;
+			background-size: auto 100%;
+		}
+		div#footer>div#airpant1{
+			position: fixed;
+			left: -182px;
+			top: 50px;
+			width: 182px;
+			height: 162px;
+			background-image: url("img/bg1.png");
+			background-size: 182px 162px;
+			animation-name: airpant1;
+			animation-duration: 60s;
+			animation-iteration-count: infinite;
+		}
+		div#footer>div#airpant2{
+			position: fixed;
+			right: -142px;
+			top: 150px;
+			width: 142px;
+			height: 122px;
+			background-image: url("img/bg2.png");
+			background-size: 142px 122px;	
+			animation-name: airpant2;
+			animation-duration: 40s;
+			animation-iteration-count: infinite;			
+		}
+		@keyframes airpant1 {
+			from {
+				left: -182px;
+				top: 50px;
+			}
+			to {
+				left: 100%;
+				top: 100px;
+			}
+		}
+		@keyframes airpant2 {
+			from {
+				right: -142px;
+				top: 150px;
+			}
+			to {
+				right: 100%;
+				top: 350px;
+			}
+		}
+	</style>
+	<script defer>
+		$(function() {	
+			var Menu = {
+				add : function(picture,callback){
+					callback=callback || function(){};
+					$('<div class="item"></div>').appendTo("body>div.container").css({"background-image":"url('img/Airline.png')"}).animateCss("bounceIn","0.5s",function(){
+						callback();
+					});	
+				}
+			};
+			$("html").animate({
+				backgroundColor: "#0091EA"
+			},0,function(){
+				$("div#title").animateCss("slideInLeft");				
+				$("div#footer").animateCss("slideInUp",function(){
+					$("div.item").hover(function(){
+						$(this).animateCss("jello");
+					});
+					//Menu.add("",function(){
+					//	Menu.add("",function(){
+					//		Menu.add("",function(){
+					//			Menu.add("",function(){
+					//
+					//			});
+					//		});
+					//	});
+					//});
+				});				
+			});			
+		});
+		$.fn.extend({
+			animateCss: function (animationName,time,callback) {
+				callback = callback || function(){};
+				time = time || "1s";
+				var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+				$(this).css({"animation-duration": time}).addClass('animated ' + animationName).one(animationEnd, function() {
+					$(this).removeClass('animated ' + animationName);
+					callback();
+				});
+				return $(this);
+			}
+		});
+	</script>
+</html>

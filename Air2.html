@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+
+  <meta charset="utf-8">
+  <title>Container</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	
+	<div class="container">
+		<div id="title">
+			Airline
+		</div>
+		
+		<div id="home">
+			<i class="fa fa-home faa-wrench animated-hover" aria-hidden="true"></i>
+		</div>
+		
+		<div id="fliter">
+			<label for="FlightNo">Flight No</label>
+			<input class="u-full-width" type="text" placeholder="Flight No" id="FlightNo">
+			<label for="Departure">Departure</label>
+			<input class="u-full-width" type="text" placeholder="Departure Airport" id="DepartureAirport">
+			<input class="u-full-width" type="text" placeholder="Departure DateTime" id="DepartureDateTime">
+			<label for="Arrival">Arrival</label>
+			<input class="u-full-width" type="text" placeholder="Arrival Airport" id="ArrivalAirport">
+			<input class="u-full-width" type="text" placeholder="Arrival DateTime" id="ArrivalDateTime">
+			<label for="FlightClass">Class</label>
+			<input class="u-full-width" type="text" placeholder="Flight Class" id="FlightClass">
+			<label for="FlightPrice">Maximum Price</label>
+			<input class="u-full-width" type="number" placeholder="(not set)" id="FlightPrice">
+			<input type="checkbox" id="FlightPriceTax"/> tax included
+		</div>
+		
+		<div id="body">
+		
+		</div>
+		
+		<div id="footer">		
+		</div>
+	</div>
+	
+</body>
+
+	<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'/>
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"/>
+	<link rel="icon" type="image/png" href="images/favicon.png"/>
+
+	<link rel="stylesheet" href="css/animate.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/normalize.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/skeleton.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/font-awesome.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/jquery.datetimepicker.min.css" rel='stylesheet' type='text/css'/>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/jquery.color-2.1.2.min.js"></script>
+	<script src="js/jquery.datetimepicker.full.min.js"></script>
+	
+	<style>
+		html{
+			height: 100%;
+			width: 100%;
+			background-color: #fff;
+			overflow: hidden;
+		}			
+		div.container{
+			margin-top: 150px;
+		}
+		div#title{
+			background-color: rgba(0,0,0,0.8);
+			color: white;
+			font-family: 'Poiret One';
+			font-size: 32px;
+			position: fixed;
+			top: 20px;
+			left: 0px;
+			padding:10px;
+			z-index: 10;
+		}
+		div#home{
+			background-color: rgba(0,0,0,0.8);
+			position: fixed;
+			color: white;
+			top: 20px;
+			right: 20px;
+			padding:10px;
+			font-size: 32px;
+			z-index: 10;
+		}
+		div#fliter{
+			background-color: rgba(0,0,0,0.8);
+			padding: 20px;
+			width: 180px;
+			color: white;
+			position: relative;
+			z-index: 10;
+		}
+		div#fliter >input{
+			border-radius: 0px;
+			border: none;
+			border-bottom: 1px solid white;
+			background-color: transparent;
+			color: white;
+		}
+		div#footer{
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			height: 300px;
+			width: 100%;
+			background-image: url("img/footer2.png");
+			background-repeat: no-repeat;
+			background-size: auto 100%;
+		}
+		div#footer>div#airpant1{
+			position: fixed;
+			left: -182px;
+			top: 50px;
+			width: 182px;
+			height: 162px;
+			background-image: url("img/bg1.png");
+			background-size: 182px 162px;
+			animation-name: airpant1;
+			animation-duration: 60s;
+			animation-iteration-count: infinite;
+		}
+		div#footer>div#airpant2{
+			position: fixed;
+			right: -142px;
+			top: 150px;
+			width: 142px;
+			height: 122px;
+			background-image: url("img/bg2.png");
+			background-size: 142px 122px;	
+			animation-name: airpant2;
+			animation-duration: 40s;
+			animation-iteration-count: infinite;			
+		}
+		@keyframes airpant1 {
+			from {
+				left: -182px;
+				top: 50px;
+			}
+			to {
+				left: 100%;
+				top: 100px;
+			}
+		}
+		@keyframes airpant2 {
+			from {
+				right: -142px;
+				top: 150px;
+			}
+			to {
+				right: 100%;
+				top: 350px;
+			}
+		}
+	</style>
+	<script defer>
+		$(function() {	
+			$("html").animate({
+				backgroundColor: "#0091EA"
+			},0,function(){
+				$.datetimepicker.setLocale('zh-TW');
+				$("div#fliter > input#DepartureDateTime").datetimepicker();
+				$("div#fliter > input#ArrivalDateTime").datetimepicker();
+			});			
+		});
+		$.fn.extend({
+			animateCss: function (animationName,time,callback) {
+				callback = callback || function(){};
+				time = time || "1s";
+				var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+				$(this).css({"animation-duration": time}).addClass('animated ' + animationName).one(animationEnd, function() {
+					$(this).removeClass('animated ' + animationName);
+					callback();
+				});
+				return $(this);
+			}
+		});
+	</script>
+</html>

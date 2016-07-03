@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+
+  <meta charset="utf-8">
+  <title>Container</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	
+	<div class="container">		
+		<div class="AirPlane">		
+		</div>
+		<div class="AirPlane">		
+		</div>
+		<div class="AirPlane">		
+		</div>
+		<div class="AirPlane">		
+		</div>
+	</div>	
+</body>
+
+	<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'/>
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"/>
+	<link rel="icon" type="image/png" href="images/favicon.png"/>
+
+	<link rel="stylesheet" href="css/animate.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/normalize.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/skeleton.min.css" rel='stylesheet' type='text/css'/>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/jquery.color-2.1.2.min.js"></script>
+	
+	<style>
+		html{
+			height: 100%;
+			width: 100%;
+			background-color: #fff;
+			overflow: hidden;
+		}	
+		body{
+			height: 100%;
+		}
+		div.container{
+			height: 100%;
+			margin-top: 150px;
+		}	
+		div#footer{
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			height: 300px;
+			width: 100%;
+			background-image: url("img/footer2.png");
+			background-repeat: no-repeat;
+			background-size: auto 100%;
+		}
+		div.AirPlane{
+			display: inline-block;			
+			width: 117px;
+			height: 1644px;
+			position: fixed;
+			bottom: -1644px;
+			background-image: url("img/loading1.png");
+			background-repeat: no-repeat;
+			background-size: 117px 1644px;			
+		}
+		div.AirPlane :nth-of-type(1){
+			left: 20%;
+		}
+		div.AirPlane :nth-of-type(2){
+			left: 35%;
+		}
+		div.AirPlane :nth-of-type(3){
+			right: 35%;
+		}
+		div.AirPlane :nth-of-type(4){
+			right: 20%;
+		}
+	</style>
+	<script defer>
+		$(function() {	
+			$("html").animate({
+				backgroundColor: "#0091EA"
+			},0,function(){
+			
+				$("div.AirPlane:nth-of-type(1)").animate({
+					"bottom": "-1000px"				
+				},1000);
+				$("div.AirPlane:nth-of-type(2)").animate({
+					"bottom": "-1100px"					
+				},2000);
+				$("div.AirPlane:nth-of-type(3)").animate({
+					"bottom": "-1200px"						
+				},3000);
+				$("div.AirPlane:nth-of-type(4)").animate({
+					"bottom": "-1300px"						
+				},4000,function(){
+					$("div.AirPlane:nth-of-type(1)").animate({
+						"bottom": "0px"				
+					},1000,function(){
+						$("div.AirPlane:nth-of-type(1)").fadeOut(1000);
+					});
+					$("div.AirPlane:nth-of-type(2)").animate({
+						"bottom": "0px"				
+					},2000,function(){
+						$("div.AirPlane:nth-of-type(2)").fadeOut(1000);
+					});
+					$("div.AirPlane:nth-of-type(3)").animate({
+						"bottom": "0px"				
+					},3000,function(){
+						$("div.AirPlane:nth-of-type(3)").fadeOut(1000);
+					});
+					$("div.AirPlane:nth-of-type(4)").animate({
+						"bottom": "0px"				
+					},4000,function(){
+						$("div.AirPlane:nth-of-type(4)").fadeOut(1000,function(){
+							
+						});
+					});
+				});				
+			});			
+		});
+		$.fn.extend({
+			animateCss: function (animationName,time,callback) {
+				callback = callback || function(){};
+				time = time || "1s";
+				var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+				$(this).css({"animation-duration": time}).addClass('animated ' + animationName).one(animationEnd, function() {
+					$(this).removeClass('animated ' + animationName);
+					callback();
+				});
+				return $(this);
+			}
+		});
+	</script>
+</html>
