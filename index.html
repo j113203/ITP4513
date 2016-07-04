@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css" rel='stylesheet' type='text/css'/>
 	<link rel="stylesheet" href="css/font-awesome-animation.min.css" rel='stylesheet' type='text/css'/>
 	<link rel="stylesheet" href="css/jquery.datetimepicker.min.css" rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="css/google.scroll.css" rel='stylesheet' type='text/css'/>
 	<script src="js/jquery-3.0.0.min.js"></script>
 	<script src="js/jquery.color-2.1.2.min.js"></script>
 	<script src="js/jquery.animate.min.js"></script>
@@ -69,12 +70,16 @@
 					Controller.switchTo_(name,"Loading/loading");				
 				},
 				switchTo_ : function(name,loading){
-					Controller.init(loading,function(){
-						Controller.cache[loading].model.callback = function(){
-							Controller.show(name);
-						};
-						Controller.show(loading);
-					});
+					if (Controller.cache[name]){
+						Controller.show(name);
+					}else{
+						Controller.init(loading,function(){
+							Controller.cache[loading].model.callback = function(){
+								Controller.show(name);
+							};
+							Controller.show(loading);
+						});
+					}					
 				} 
 			}
 			Controller.switchTo("Common/login");
