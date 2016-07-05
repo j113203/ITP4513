@@ -80,7 +80,16 @@
 							Controller.show(loading);
 						});
 					}					
-				} 
+				},
+				show_ : function(title,url){
+					Controller.init("Module/iFrame",function(){		
+						Controller.cache["Module/iFrame"].model.title = title;
+						$.get(url,function(data){
+							Controller.cache["Module/iFrame"].model.body = data;
+							Controller.show("Module/iFrame");
+						});
+					});
+				}
 			}
 			Controller.switchTo("Common/login");
 		})();

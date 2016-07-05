@@ -38,6 +38,10 @@ function handle(data){
 					return function(){
 						Controller.switchTo_("Module/"+name,"Loading/loading2");
 					};
+				case "Hello":
+					return function(){
+						Controller.show_(name,"hello.html");
+					};
 				default:
 					return function(){
 						Controller.init("Loading/loading",function(){
@@ -84,7 +88,7 @@ function handle(data){
 			});
 		});
 		
-		Menu.init("Airline","Hotel","Order");
+		Menu.init("Airline","Hotel","Order","Hello");
 		
 	});
 }
